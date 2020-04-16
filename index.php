@@ -33,7 +33,8 @@
   </nav>
 
 <div class='container'>
-    <div class="gallery">
+  <div class="gallery">
+    <div class="row text-center text-lg-left">
 
 <?php 
 ini_set('display_errors', 1);
@@ -70,14 +71,11 @@ if (is_dir($dir)){
           in_array($image_ext,$image_extensions)){
 ?>
                 <!-- Image -->
-                <a href="<?= $image_path; ?>">
-                  <img src="<?= $thumbnail_path; ?>">
-                </a>
-<?php
-          // Break
-          if( $count%4 == 0){
-?>
-                   <div class="clear"></div>
+                <div class="col-lg-3 col-md-4 col-6">
+                  <a href="<?= $image_path; ?>" class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="<?= $thumbnail_path ?>" alt="">
+                  </a>
+                </div>                
 <?php 
           }
           $count++;
@@ -87,10 +85,10 @@ if (is_dir($dir)){
     }
     closedir($dh);
   }
-}
 ?>
       </div>
     </div>
+  </div>
 <script type='text/javascript'>
 $(document).ready(function(){
   $('.gallery').photobox('a',{ time:0 });
