@@ -1,5 +1,46 @@
 <?php
 
+function getImages()
+{
+
+    $retArry = [];
+
+    // Image extensions
+    $image_extensions = array("png","jpg","jpeg","gif", "PNG", "JPG", "JPEG", "GIF");
+
+    // Target directory
+    $dir = 'images/';
+    if (is_dir($dir)) {
+        if ($dh = opendir($dir)) {
+            $count = 1;
+
+            // Read files
+            while (($file = readdir($dh)) !== false) {
+                if ($file != '' && $file != '.' && $file != '..') {
+                    // Thumbnail image path
+                    $thumbnail_path = "images/thumbnail/".$file;
+
+                    // Image path
+                    $image_path = "images/".$file;
+
+                    $thumbnail_ext = pathinfo($thumbnail_path, PATHINFO_EXTENSION);
+                    $image_ext = pathinfo($image_path, PATHINFO_EXTENSION);
+
+                    // Check its not folder and it is image file
+                    if (!is_dir($image_path) &&  in_array($thumbnail_ext, $image_extensions) &&  in_array($image_ext, $image_extensions)) {
+                        array_push($retArry, [
+                            'path' => $image_path,
+                            'thumbmail_path' => $thumbnail_path,
+                        ]);
+                    }
+                }
+            }
+            return $retArry;
+        }
+    }
+    return null;
+}
+
 function reArrayFiles(&$file_post) {
 
     $file_ary = array();
@@ -69,16 +110,5 @@ function reArrayFiles(&$file_post) {
     }
 
     return true;
-  }
-
-  function processUploads() {
-    // PHP Server Code to process submitted form
-    $numUploadedfiles = count($_FILES['imagefiles']);
-    for($i = 0; $i < $numUploadedfiles; $i++)
-    {
-        echo "<br>filename " . $i . " is: " . $_FILES['imagefiles'][$i];
-        // or do whatever
-    }
-    exit;
   }
   
