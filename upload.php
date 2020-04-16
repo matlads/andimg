@@ -4,87 +4,55 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-function reArrayFiles(&$file_post) {
+require('upload.inc.php');
 
-  $file_ary = array();
-  $file_count = count($file_post['name']);
-  $file_keys = array_keys($file_post);
-
-  for ($i=0; $i<$file_count; $i++) {
-    foreach ($file_keys as $key) {
-      $file_ary[$i][$key] = $file_post[$key][$i];
-    }
-  }
-
-  return $file_ary;
-}
-
-if(isset($_POST['upload'])){
-
-  $file_ary = reArrayFiles($_FILES['imagefiles']);
-  
-  // Valid extension
-  $valid_ext = array('png','jpeg','jpg');
-
-  foreach ($file_ary as $file) {
-
-    // File name
-    $filename = $file['name'];
-    $tmp_name = $file['tmp_name'];
-    $file_type = $file['type'];
-
-    // Location
-    $location = "images/".$filename;
-    $thumbnail_location = "images/thumbnail/".$filename;
-
-    // file extension
-    $file_extension = pathinfo($location, PATHINFO_EXTENSION);
-    $file_extension = strtolower($file_extension);
-
-    // Check extension
-    if(in_array($file_extension,$valid_ext)){ 
-
-      // Upload file
-      if(move_uploaded_file($tmp_name, $location)){
-
-        // Compress Image
-        compressImage($file_type, $location,$thumbnail_location, 60);
-
-      }
-
-    }
-  }
-  header("Location: index.php");
-}
-
-// Compress image
-function compressImage($type, $source, $destination, $quality) {
-
-  $info = getimagesize($source);
-
-  if ($type == 'image/jpeg') 
-    $image = imagecreatefromjpeg($source);
-
-  elseif ($type == 'image/gif') 
-    $image = imagecreatefromgif($source);
-
-  elseif ($type == 'image/png') 
-    $image = imagecreatefrompng($source);
-
-  imagejpeg($image, $destination, $quality);
-
-}
-
-?><!doctype html>
+if(isset($_FILES['imagefiles']))
+{
+  handleUploads($_FILES['imagefiles']);
+  header("Location: index.php");  
+} else {
+  $str = <<<EOD
+<!doctype html>
 <html>
 <head>
   <title>AndImg - Upload</title>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- bootstrap 4.x is supported. You can also use the bootstrap css 3.3.x versions -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- if using RTL (Right-To-Left) orientation, load the RTL CSS file after fileinput.css by uncommenting below -->
+    <!-- link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/css/fileinput-rtl.min.css" media="all" rel="stylesheet" type="text/css" /-->
+    <!-- the font awesome icon library if using with `fas` theme (or Bootstrap 4.x). Note that default icons used in the plugin are glyphicons that are bundled only with Bootstrap 3.x. -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" text="text/css" href='css/style.css'>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <!-- piexif.min.js is needed for auto orienting image files OR when restoring exif data in resized images and when you
+        wish to resize images before upload. This must be loaded before fileinput.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/js/plugins/piexif.min.js" type="text/javascript"></script>
+    <!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview. 
+        This must be loaded before fileinput.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/js/plugins/sortable.min.js" type="text/javascript"></script>
+    <!-- purify.min.js is only needed if you wish to purify HTML content in your preview for 
+        HTML files. This must be loaded before fileinput.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/js/plugins/purify.min.js" type="text/javascript"></script>
+    <!-- popper.min.js below is needed if you use bootstrap 4.x (for popover and tooltips). You can also use the bootstrap js 
+        3.3.x versions without popper.min.js. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- bootstrap.min.js below is needed if you wish to zoom and preview file content in a detail modal
+        dialog. bootstrap 4.x is supported. You can also use the bootstrap js 3.3.x versions. -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <!-- the main fileinput plugin file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/js/fileinput.min.js"></script>
+    <!-- following theme script is needed to use the Font Awesome 5.x theme (`fas`) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/themes/fas/theme.min.js"></script>
+    <!-- optionally if you need translation for your language then include the locale file as mentioned below (replace LANG.js with your language locale) -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/js/locales/LANG.js"></script> -->
 </head>
 <body class="container">
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="index.php">AndImg</a>
+    <div class="navbar-brand" href="">ᗩᑎᗪ IᗰG</div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -101,17 +69,13 @@ function compressImage($type, $source, $destination, $quality) {
     </div>
   </nav>
 
-  <div>
-    <h2>Upload Images</h2>
-    <!-- Upload form -->
-    <form method='post' action='' enctype='multipart/form-data'>
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Select Photo (one or multiple):</label>
-        <input type='file' name='imagefiles[]' class="form-control-file" multiple id="field1">
-      </div>
-      <button type='submit' value='Upload' name='upload' class="btn btn-primary">Upload</button>
-    </form>
-  </div>
+  <form enctype="multipart/form-data" action="" method="POST">
+    <input name="imagefiles[]" type="file" class="file" multiple="multiple" data-preview-file-type="text">
+  </form>
 
 </body>
 </html>
+EOD;
+  echo $str;
+}
+?>
