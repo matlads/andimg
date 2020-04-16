@@ -38,13 +38,13 @@
     <div class='container'>
         <div class="gallery">
             <div class="row text-center text-lg-left">
-                <repeat group="{{ @images }}" value="{{ @image }}"></repeat>
+<repeat group="{{ @images }}" value="{{ @image }}">
                 <div class="col-lg-3 col-md-4 col-6">
                     <a href="{{ @image.path }}" class="d-block mb-4 h-100">
                         <img class="img-fluid img-thumbnail" src="{{ @image.thumbmail_path }}">
                     </a>
                 </div>
-                </repeat>
+</repeat>
             </div>
         </div>
     </div>
