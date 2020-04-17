@@ -2,7 +2,8 @@
     "name": "matlads/andimg",
     "description": "Andela Image Thingy",
     "require": {
-        "bcosca/fatfree": "*"
+        "bcosca/fatfree": "*",
+        "php": "^7"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*"
