@@ -6,6 +6,14 @@ An image sharing site.
 
 [unsee](http://app.unsee.cc) was too slow, so I (with urging from Joshua Okello) built this.
 
+This project uses:
+
+1. [FatFree PHP Framework](https://fatfreeframework.com)
+2. [composer](https://getcomposer.org/)
+3. [jquery](https://jquery.com)
+4. [bootstrap](https://getbootstrap.com/)
+5. [photobox](https://github.com/yairEO/photobox)
+
 ## Table of Contents
 
 - [Install](#install)
@@ -16,10 +24,8 @@ An image sharing site.
 
 ## Install
 
-This project uses the [FatFree PHP Framework](https://fatfreeframework.com), and [composer](https://getcomposer.org/)
-
 ```sh
-$ cd /var/www/html
+$ cd /var/www/html # go to the webroot
 $ git clone https://github.com/matlads/andimg .
 $ composer install
 $ chmod a+rwx images images/thumbnail/
