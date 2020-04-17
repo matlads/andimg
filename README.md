@@ -4,7 +4,7 @@
 
 An image sharing site.
 
-TODO: Fill out this long description.
+[unsee](http://app.unsee.cc) was too slow, so I (with urging from Joshua Okello) built this.
 
 ## Table of Contents
 
@@ -16,13 +16,19 @@ TODO: Fill out this long description.
 
 ## Install
 
-```
+This project uses the [FatFree PHP Framework](https://fatfreeframework.com), and [composer](https://getcomposer.org/)
+
+```sh
+$ cd /var/www/html
+$ git clone https://github.com/matlads/andimg .
+$ composer install
+$ chmod a+rwx images images/thumbnail/
 ```
 
 ## Usage
 
-```
-```
+1. Using your browser go to root of the app. e.g: http://example.com/
+2. Click on the upload link, and then on the browse button. You can select multiple image files to upload
 
 ## Maintainers
 
