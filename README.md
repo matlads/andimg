@@ -4,7 +4,7 @@
 
 An image sharing site.
 
-[unsee](http://app.unsee.cc) was too slow, so I (with urging from Joshua Okello) built this.
+[unsee](http://app.unsee.cc) was too slow, so I built this - (with urging from [@slybard](https://github.com/slybard)).
 
 This project uses:
 
