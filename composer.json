@@ -1,0 +1,7 @@
+{
+    "name": "matlads/andimg",
+    "description": "Andela Image Thingy",
+    "require": {
+        "bcosca/fatfree": "*"
+    }
+}

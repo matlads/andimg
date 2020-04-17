@@ -1,8 +1,8 @@
 <?php
 
-error_reporting(0);
+require 'vendor/autoload.php';
+$f3 = \Base::instance();
 
-$f3 = require('fatfree/lib/base.php');
 require('app.inc.php');
 
 $f3->route('GET /',
