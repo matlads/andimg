@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb0f30e11ccba2ae57e88a93f720d0ba",
+    "content-hash": "75c060c4fd72a84a674e90ff8d5dc0b4",
     "packages": [
         {
             "name": "bcosca/fatfree",
@@ -90,7 +90,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7"
+        "php": "^7",
+        "ext-gd": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
