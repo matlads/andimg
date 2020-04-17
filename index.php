@@ -6,10 +6,8 @@ $f3 = \Base::instance();
 require('app.inc.php');
 
 $f3->route('GET /',
-    function($f3) {
-        $images = getImages();        
-        $f3->set('buddies', array('Tom','Dick','Harry'));
-        $f3->set('images', $images);
+    function($f3) {   
+        $f3->set('images', getImages());
         echo \Template::instance()->render('templates/home.htm');
     }
 );

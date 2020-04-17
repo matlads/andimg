@@ -3,5 +3,8 @@
     "description": "Andela Image Thingy",
     "require": {
         "bcosca/fatfree": "*"
+    },
+    "require-dev": {
+        "heroku/heroku-buildpack-php": "*"
     }
 }
