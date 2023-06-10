@@ -3,7 +3,6 @@
     "description": "Andela Image Thingy",
     "require": {
         "bcosca/fatfree": "*",
-        "php": "^7",
         "ext-gd": "*"
     },
     "require-dev": {

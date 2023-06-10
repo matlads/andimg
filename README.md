@@ -31,10 +31,17 @@ $ composer install
 $ chmod a+rwx images images/thumbnail/
 ```
 
+
 ## Usage
 
-1. Using your browser go to root of the app. e.g: http://example.com/
-2. Click on the upload link, and then on the browse button. You can select multiple image files to upload
+1. run the app like so:
+``sh
+$ php -S 127.0.0.1:8080
+``
+
+2. Using your browser go to root of the app. e.g: http://127.0.0.1:8080/
+
+3. Click on the upload link, and then on the browse button. You can select multiple image files to upload
 
 ## Maintainers
 
